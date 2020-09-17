@@ -1,4 +1,5 @@
 import requests, hashlib, string, random, uuid, time, calendar, re, json
+from sys import platform
 
 class colors:
 
@@ -46,6 +47,11 @@ class colors:
     BEIGEBG2  = '\33[106m'
     WHITEBG2  = '\33[107m'
 
+def escape(string):
+    if platform == "win32" or platform == "win64" or platform == "windows":
+        return string.replace('/', '\\')
+    else: return string
+    
 def printc(value, color='', nonewline=None, more=''):
 
     end = '\n'
@@ -339,7 +345,7 @@ print()
 username = inputc('Username: ', colors.YELLOW)
 password = inputc('Password: ', colors.YELLOW)
 t = int(inputc('sleep (milliseconds, best: 500): ', colors.YELLOW))
-path = inputc('path: (like: /users/ali/Desktop/list.txt): ', colors.YELLOW)
+path = escape(inputc('path: (like: /users/ali/Desktop/list.txt): ', colors.YELLOW))
 f = open(path, 'a')
 
 version = '155.0.0.37.107'
